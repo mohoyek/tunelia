@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="TUNELIA — IT and network services">
+  <rect width="1200" height="630" fill="#0a0c0e"/>
+  <g stroke="#151a1f" stroke-width="1">
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="0" y1="315" x2="1200" y2="315"/>
+  </g>
+  <text x="48" y="66" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="22" letter-spacing="3" fill="#4a525a">SOCIAL CARD / 1200 x 630</text>
+
+  <g transform="translate(240 315) scale(3.0) translate(-50 -50)">
+    <circle cx="50" cy="50" r="43" fill="none" stroke="#262d34" stroke-width="1.5" stroke-dasharray="7.5 26.27"/>
+    <g fill="none" stroke="#5c3f1f" stroke-width="1" stroke-linecap="round">
+      <path d="M50 22 L22 50"/>
+      <path d="M50 22 L78 50"/>
+      <path d="M22 50 L50 78"/>
+      <path d="M78 50 L50 78"/>
+      <path d="M22 50 L78 50"/>
+    </g>
+    <g fill="#0a0c0e" stroke="#d1802c" stroke-width="1.5">
+      <circle cx="50" cy="22" r="5.2"/>
+      <circle cx="22" cy="50" r="5.2"/>
+      <circle cx="78" cy="50" r="5.2"/>
+      <circle cx="50" cy="78" r="5.2"/>
+    </g>
+    <circle cx="50" cy="50" r="2" fill="#d1802c" stroke="none"/>
+  </g>
+
+  <text x="1136" y="300" text-anchor="end" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="112" font-weight="700" letter-spacing="16" fill="#e8eaec">TUNELIA</text>
+  <line x1="860" y1="352" x2="1136" y2="352" stroke="#d1802c" stroke-width="3"/>
+  <text x="1136" y="410" text-anchor="end" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="34" letter-spacing="5" fill="#8b949c">NETWORK . SERVER . SECURITY</text>
+  <text x="1136" y="462" text-anchor="end" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="34" letter-spacing="5" fill="#8b949c">ACCOUNTING . BACKUP . SUPPORT</text>
+  <text x="1136" y="560" text-anchor="end" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="28" letter-spacing="4" fill="#565f68">tunelia.ir</text>
+</svg>
