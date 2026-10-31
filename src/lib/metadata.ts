@@ -6,7 +6,7 @@ export const professionalServiceJsonLd = {
   description:
     'ارائه‌دهنده خدمات حرفه‌ای شبکه، زیرساخت و فناوری اطلاعات؛ راه‌اندازی و پشتیبانی شبکه‌های کامپیوتری، مدیریت سرور، امنیت اطلاعات، بکاپ‌گیری، نصب نرم‌افزارهای حسابداری و نگهداری دوره‌ای مجموعه‌ها',
   url: 'https://tunelia.ir/',
-  logo: 'https://tunelia.ir/brand.svg',
+  logo: 'https://tunelia.ir/tunelia-logo.png',
   telephone: '+989013365949',
   email: 'info@tunelia.com',
   priceRange: '$$',

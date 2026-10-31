@@ -37,28 +37,13 @@ export default function Contact() {
       className="marked mt-20 border border-line py-12 px-8 text-center bg-panel max-[640px]:p-7"
       aria-labelledby="contact-title"
     >
-      <svg
-        className="contact-logo w-16 h-16 mx-auto mb-6 text-accent"
-        viewBox="0 0 64 64"
-        xmlns="http://www.w3.org/2000/svg"
-        role="img"
-        aria-label="لوگوی تونلیها"
-      >
-        <g fill="none" stroke="currentColor" strokeWidth="1.2">
-          <line x1="32" y1="14" x2="18" y2="32" />
-          <line x1="32" y1="14" x2="46" y2="32" />
-          <line x1="18" y1="32" x2="32" y2="50" />
-          <line x1="46" y1="32" x2="32" y2="50" />
-          <line x1="18" y1="32" x2="46" y2="32" />
-        </g>
-        <g fill="var(--ink)" stroke="currentColor" strokeWidth="1.4">
-          <circle cx="32" cy="14" r="6" />
-          <circle cx="18" cy="32" r="6" />
-          <circle cx="46" cy="32" r="6" />
-          <circle cx="32" cy="50" r="6" />
-        </g>
-        <circle cx="32" cy="32" r="2" fill="currentColor" />
-      </svg>
+      <img
+        src="/tunelia-logo.png"
+        alt="تونلیها"
+        width={64}
+        height={64}
+        className="contact-logo w-16 h-16 mx-auto mb-6 rounded-sm"
+      />
       <h2 id="contact-title" className="text-[1.7rem] text-steel font-bold">با ما در تماس باشید</h2>
       <p className="lead mt-4 text-steel-muted text-[1.02rem]">
         برای مشاوره و استعلام قیمت همین الان پیام بده.

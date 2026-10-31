@@ -19,8 +19,8 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: [{ url: '/brand.svg', type: 'image/svg+xml' }],
-    apple: '/brand-180.png',
+    icon: [{ url: '/tunelia-logo.png', type: 'image/png' }],
+    apple: '/tunelia-logo.png',
   },
   openGraph: {
     type: 'website',
