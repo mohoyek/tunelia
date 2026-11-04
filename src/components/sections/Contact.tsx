@@ -1,4 +1,5 @@
 import ContactButton from '../ui/ContactButton';
+import Image from 'next/image';
 
 const TelegramIcon = (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
@@ -37,12 +38,13 @@ export default function Contact() {
       className="marked mt-20 border border-line py-12 px-8 text-center bg-panel max-[640px]:p-7"
       aria-labelledby="contact-title"
     >
-      <img
+      <Image
         src="/tunelia-logo.png"
         alt="تونلیها"
         width={64}
         height={64}
         className="contact-logo w-16 h-16 mx-auto mb-6 rounded-sm"
+        priority
       />
       <h2 id="contact-title" className="text-[1.7rem] text-steel font-bold">با ما در تماس باشید</h2>
       <p className="lead mt-4 text-steel-muted text-[1.02rem]">

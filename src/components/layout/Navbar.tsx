@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export default function Navbar() {
   return (
     <nav
@@ -5,12 +7,13 @@ export default function Navbar() {
       className="sticky top-0 z-50 flex items-center justify-between px-[6%] py-4 border-b border-line bg-ink/86 backdrop-blur-md"
     >
       <div className="flex items-center gap-2.5 font-bold text-steel text-[1.05rem]">
-        <img
+        <Image
           src="/tunelia-logo.png"
           alt="تونلیها"
           width={26}
           height={26}
           className="rounded-sm"
+          priority
         />
         تونلیها
       </div>
