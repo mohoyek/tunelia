@@ -83,13 +83,14 @@ export const webSiteJsonLd = {
 
 export const organizationJsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
+  '@type': 'LocalBusiness',
   name: 'تونلیها',
   alternateName: 'TUNELIA',
   url: 'https://tunelia.ir/',
   logo: 'https://tunelia.ir/tunelia-logo.png',
   telephone: '+989013365949',
   email: 'info@tunelia.com',
+  priceRange: '$$',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'تهران، ایران',
@@ -98,6 +99,12 @@ export const organizationJsonLd = {
     postalCode: '',
     addressCountry: 'IR',
   },
+  areaServed: [
+    { '@type': 'City', name: 'دزفول' },
+    { '@type': 'City', name: 'شوش' },
+    { '@type': 'City', name: 'اندیمشک' },
+    { '@type': 'City', name: 'خوزستان' },
+  ],
   openingHoursSpecification: {
     '@type': 'OpeningHoursSpecification',
     dayOfWeek: [
@@ -119,6 +126,16 @@ export const organizationJsonLd = {
     contactType: 'customer service',
     availableLanguage: ['Persian', 'English'],
   },
+  serviceType: [
+    'راه‌اندازی و پشتیبانی شبکه‌های کامپیوتری',
+    'نصب و پشتیبانی نرم‌افزارهای حسابداری',
+    'راه‌اندازی و مدیریت سرور',
+    'تأمین امنیت شبکه و سرور',
+    'بکاپ‌گیری حرفه‌ای و بازیابی اطلاعات',
+    'رفع مشکلات سیستم و شبکه',
+    'راه‌اندازی اشتراک فایل و منابع',
+    'پشتیبانی و نگهداری دوره‌ای',
+  ],
 };
 
 export function breadcrumbJsonLd(items: { name: string; url: string }[]) {
