@@ -74,4 +74,62 @@ export const webSiteJsonLd = {
   alternateName: 'TUNELIA',
   url: 'https://tunelia.ir/',
   inLanguage: 'fa',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: 'https://tunelia.ir/search?q={search_term}',
+    'query-input': 'required name=search_term',
+  },
 };
+
+export const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'تونلیها',
+  alternateName: 'TUNELIA',
+  url: 'https://tunelia.ir/',
+  logo: 'https://tunelia.ir/tunelia-logo.png',
+  telephone: '+989013365949',
+  email: 'info@tunelia.com',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'تهران، ایران',
+    addressLocality: 'تهران',
+    addressRegion: 'تهران',
+    postalCode: '',
+    addressCountry: 'IR',
+  },
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday',
+    ],
+    opens: '00:00',
+    closes: '23:59',
+  },
+  sameAs: ['https://t.me/mohoyek', 'https://wa.me/989013365949'],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: '+989013365949',
+    contactType: 'customer service',
+    availableLanguage: ['Persian', 'English'],
+  },
+};
+
+export function breadcrumbJsonLd(items: { name: string; url: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.url.startsWith('http') ? item.url : `https://tunelia.ir${item.url}`,
+    })),
+  };
+}

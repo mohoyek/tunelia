@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { services } from '@/data/services';
-import { professionalServiceJsonLd, webSiteJsonLd } from '@/lib/metadata';
+import { professionalServiceJsonLd, webSiteJsonLd, breadcrumbJsonLd } from '@/lib/metadata';
 import Image from 'next/image';
 import IconSvg from '@/components/ui/IconSvg';
 
@@ -206,6 +206,18 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
 
   return (
     <section className="max-w-container mx-auto py-20 px-[5%] max-[640px]:py-14 max-[640px]:px-[6%]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbJsonLd([
+              { name: 'صفحه اصلی', url: '/' },
+              { name: 'خدمات', url: '/services' },
+              { name: service.title, url: `/services/${params.slug}` },
+            ])
+          ),
+        }}
+      />
       <nav className="mb-12" aria-label="نمای nurture">
         <ol className="flex items-center gap-2 text-[0.85rem] text-steel-muted font-mono">
           <li>

@@ -5,10 +5,17 @@ import ServicesSection from '@/components/sections/ServicesSection';
 import RiskSection from '@/components/sections/RiskSection';
 import WhyUs from '@/components/sections/WhyUs';
 import Contact from '@/components/sections/Contact';
+import { breadcrumbJsonLd } from '@/lib/metadata';
 
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbJsonLd([{ name: 'صفحه اصلی', url: '/' }])),
+        }}
+      />
       <Navbar />
       <Hero />
       <main className="max-w-container mx-auto py-20 px-[5%] max-[640px]:py-14 max-[640px]:px-[6%]">
