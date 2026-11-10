@@ -21,13 +21,13 @@ export async function generateMetadata({ params }: { params: { city: string } })
 
   if (!city) {
     return {
-      title: 'شهر یافت نشد | تونلیها',
+      title: 'شهر یافت نشد | تونلیا',
       description: 'شهر مورد نظر یافت نشد.',
     };
   }
 
-  const title = `خدمات شبکه و سرور در ${city.name} | تونلیها`;
-  const description = `${city.description} — پشتیبانی حرفه‌ای شبکه، سرور و امنیت اطلاعات با پشتیبانی تخصصی تونلیها.`;
+  const title = `خدمات شبکه و سرور در ${city.name} | تونلیا`;
+  const description = `${city.description} — پشتیبانی حرفه‌ای شبکه، سرور و امنیت اطلاعات با پشتیبانی تخصصی تونلیا.`;
 
   return {
     title,
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: { params: { city: string } })
           url: '/tunelia-logo.png',
           width: 640,
           height: 360,
-          alt: `${city.name} - تونلیها`,
+          alt: `${city.name} - تونلیا`,
         },
       ],
     },
@@ -65,7 +65,7 @@ export default function CityPage({ params }: { params: { city: string } }) {
     return (
       <section className="max-w-container mx-auto py-20 px-[5%]">
         <h1 className="text-steel font-bold text-2xl">شهر یافت نشد</h1>
-        <p className="text-steel-muted mt-4">شهر مورد نظر در سایت تونلیها موجود نیست.</p>
+        <p className="text-steel-muted mt-4">شهر مورد نظر در سایت تونلیا موجود نیست.</p>
       </section>
     );
   }
@@ -77,27 +77,41 @@ export default function CityPage({ params }: { params: { city: string } }) {
       </h1>
 
       <p className="text-lg text-steel-muted mb-8 leading-relaxed">
-        {city.description} با 팀 تخصصی تونلیها، خدمات شبکه، سرور، امنیت اطلاعات و بکاپ‌گیری را در
+        {city.description} با تیم تخصصی تونلیا، خدمات شبکه، سرور، امنیت اطلاعات و بکاپ‌گیری را در
         {city.name} و مناطق حومه ارائه می‌دهیم.
       </p>
 
       <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-px bg-line border border-line mb-16">
-        {services.map((service) => (
-          <a
-            key={service.id}
-            href={`/services/${Object.entries({ network: 1, accounting: 2, server: 3, security: 4, backup: 5, support: 6, sharing: 7, maintenance: 8 }).find(([, id]) => id === service.id)?.[0] || service.id}`}
-            className="bg-panel p-6 transition-colors hover:bg-panel-2 border-b border-line last:border-0"
-          >
-            <div className="flex items-center gap-3 mb-3">
-              <span className="w-[24px] h-[24px] text-accent flex-shrink-0">
-                <IconSvg name={service.iconKey} />
-              </span>
-              <span className="font-mono text-accent text-[0.75rem]">{service.num}</span>
-            </div>
-            <h3 className="text-steel font-semibold text-[1.05rem] mb-2">{service.title}</h3>
-            <p className="text-steel-muted text-[0.9rem]">{service.description}</p>
-          </a>
-        ))}
+        {services.map((service) => {
+          const slugMap: Record<number, string> = {
+            1: 'backup',
+            2: 'accounting',
+            3: 'server',
+            4: 'security',
+            5: 'network',
+            6: 'support',
+            7: 'sharing',
+            8: 'maintenance',
+            9: 'web',
+          };
+          const slug = slugMap[service.id] || service.id.toString();
+          return (
+            <a
+              key={service.id}
+              href={`/services/${slug}`}
+              className="bg-panel p-6 transition-colors hover:bg-panel-2 border-b border-line last:border-0"
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <span className="w-[24px] h-[24px] text-accent flex-shrink-0">
+                  <IconSvg name={service.iconKey} />
+                </span>
+                <span className="font-mono text-accent text-[0.75rem]">{service.num}</span>
+              </div>
+              <h3 className="text-steel font-semibold text-[1.05rem] mb-2">{service.title}</h3>
+              <p className="text-steel-muted text-[0.9rem]">{service.description}</p>
+            </a>
+          );
+        })}
       </div>
 
       <div className="bg-panel border border-line p-12 rounded-[2px] mb-16 text-center">

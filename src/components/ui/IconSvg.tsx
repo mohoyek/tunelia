@@ -114,6 +114,12 @@ const PATHS: Record<string, JSX.Element> = {
       <circle cx="12" cy="10" r="2.5" />
     </g>
   ),
+  web: (
+    <g fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+    </g>
+  ),
 };
 
 export default function IconSvg({ name, className, width, height }: IconSvgProps) {

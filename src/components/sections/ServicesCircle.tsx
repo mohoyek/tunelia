@@ -13,6 +13,7 @@ const WEDGE_PATHS = [
   'M150.5,249.5 L65.65,334.35 A190,190 0 0,1 10,200 L130,200 A70,70 0 0,0 150.5,249.5 Z',
   'M130,200 L10,200 A190,190 0 0,1 65.65,65.65 L150.5,150.5 A70,70 0 0,0 130,200 Z',
   'M150.5,150.5 L65.65,65.65 A190,190 0 0,1 200,10 L200,130 A70,70 0 0,0 150.5,150.5 Z',
+  'M200,10 L200,130 A190,190 0 0,1 334.35,65.65 L270,130 A70,70 0 0,0 200,10 Z',
 ];
 
 const LABEL_COORDS = [
@@ -24,6 +25,7 @@ const LABEL_COORDS = [
   { x: 79.9, y: 257 },
   { x: 79.9, y: 158 },
   { x: 150.25, y: 90 },
+  { x: 249.75, y: 40 },
 ];
 
 const ICON_COORDS = [
@@ -35,6 +37,7 @@ const ICON_COORDS = [
   { x: 79.9, y: 239.75 },
   { x: 79.9, y: 140.25 },
   { x: 150.25, y: 69.9 },
+  { x: 249.75, y: 20 },
 ];
 
 export default function ServicesCircle() {
@@ -53,7 +56,7 @@ export default function ServicesCircle() {
           viewBox="0 0 400 400"
           xmlns="http://www.w3.org/2000/svg"
           role="img"
-          aria-label="دایره ۸ بخشی خدمات تونلیها"
+          aria-label="دایره ۹ بخشی خدمات تونلیا"
         >
           <g>
             {WEDGE_PATHS.map((d, i) => (
@@ -90,7 +93,7 @@ export default function ServicesCircle() {
               {active === null ? (
                 <div className="absolute inset-1.5 flex flex-col items-center justify-center gap-0.5">
                   <span className="font-mono text-accent text-[13px]">خدمات</span>
-                  <span className="font-mono text-accent text-[13px]">تونلیها</span>
+                  <span className="font-mono text-accent text-[13px]">تونلیا</span>
                 </div>
               ) : (
                 <div className="absolute inset-1.5 flex items-center justify-center text-[11px] leading-[1.55] text-steel max-[480px]:text-[9.5px]">

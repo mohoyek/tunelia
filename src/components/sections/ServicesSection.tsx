@@ -9,7 +9,7 @@ export default function ServicesSection() {
       <SectionHead
         title="کسب‌وکارت رو حرفه‌ای‌تر مدیریت کن!"
         titleId="services-title"
-        idx="SERVICES / 01–08"
+        idx="SERVICES / 01–09"
       />
       <p className="text-[1.15rem] text-steel-muted max-w-[820px] mb-10">
         از شبکه و سرور گرفته تا حسابداری و امنیت اطلاعات، همه‌چیز رو یکجا بسپار به{' '}

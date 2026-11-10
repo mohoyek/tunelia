@@ -9,13 +9,13 @@ export default function Navbar() {
       <div className="flex items-center gap-2.5 font-bold text-steel text-[1.05rem]">
         <Image
           src="/tunelia-logo.png"
-          alt="تونلیها"
+          alt="تونلیا"
           width={26}
           height={26}
           className="rounded-sm"
           priority
         />
-        تونلیها
+        تونلیا
       </div>
       <ul className="flex gap-8 list-none max-[720px]:hidden">
         <li>

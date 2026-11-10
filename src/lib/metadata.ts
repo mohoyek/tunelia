@@ -1,7 +1,7 @@
 export const professionalServiceJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
-  name: 'تونلیها',
+  name: 'تونلیا',
   alternateName: 'TUNELIA',
   description:
     'ارائه‌دهنده خدمات حرفه‌ای شبکه، زیرساخت و فناوری اطلاعات؛ راه‌اندازی و پشتیبانی شبکه‌های کامپیوتری، مدیریت سرور، امنیت اطلاعات، بکاپ‌گیری، نصب نرم‌افزارهای حسابداری و نگهداری دوره‌ای مجموعه‌ها',
@@ -29,7 +29,7 @@ export const professionalServiceJsonLd = {
   sameAs: ['https://t.me/mohoyek', 'https://wa.me/989013365949'],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'خدمات تونلیها',
+    name: 'خدمات تونلیا',
     itemListElement: [
       {
         '@type': 'Offer',
@@ -63,6 +63,10 @@ export const professionalServiceJsonLd = {
         '@type': 'Offer',
         itemOffered: { '@type': 'Service', name: 'پشتیبانی و نگهداری دوره‌ای مجموعه‌ها' },
       },
+      {
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name: 'طراحی سایت‌های شرکتی' },
+      },
     ],
   },
 };
@@ -70,7 +74,7 @@ export const professionalServiceJsonLd = {
 export const webSiteJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'تونلیها',
+  name: 'تونلیا',
   alternateName: 'TUNELIA',
   url: 'https://tunelia.ir/',
   inLanguage: 'fa',
@@ -84,7 +88,7 @@ export const webSiteJsonLd = {
 export const organizationJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  name: 'تونلیها',
+  name: 'تونلیا',
   alternateName: 'TUNELIA',
   url: 'https://tunelia.ir/',
   logo: 'https://tunelia.ir/tunelia-logo.png',
@@ -135,6 +139,7 @@ export const organizationJsonLd = {
     'رفع مشکلات سیستم و شبکه',
     'راه‌اندازی اشتراک فایل و منابع',
     'پشتیبانی و نگهداری دوره‌ای',
+    'طراحی سایت‌های شرکتی',
   ],
 };
 

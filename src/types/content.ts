@@ -4,7 +4,7 @@ export interface Service {
   title: string;
   description: string;
   tags: string[];
-  iconKey: 'network' | 'accounting' | 'server' | 'security' | 'backup' | 'support' | 'sharing' | 'maintenance';
+  iconKey: 'network' | 'accounting' | 'server' | 'security' | 'backup' | 'support' | 'sharing' | 'maintenance' | 'web';
 }
 
 export interface Project {

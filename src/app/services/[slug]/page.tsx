@@ -13,17 +13,19 @@ const SLUG_TO_ID: Record<string, number> = {
   support: 6,
   sharing: 7,
   maintenance: 8,
+  web: 9,
 };
 
 const ID_TO_SLUG: Record<number, string> = {
-  1: 'network',
+  1: 'backup',
   2: 'accounting',
   3: 'server',
   4: 'security',
-  5: 'backup',
+  5: 'network',
   6: 'support',
   7: 'sharing',
   8: 'maintenance',
+  9: 'web',
 };
 
 const SERVICE_DETAILS: Record<number, { summary: string; details: string[]; faq: { q: string; a: string }[] }> = {
@@ -125,7 +127,7 @@ const SERVICE_DETAILS: Record<number, { summary: string; details: string[]; faq:
       { q: 'آیا پرینتر شبکه مشمول است؟', a: 'بله، اشتراک‌گذاری پرینتر شبکه شامل است.' },
     ],
   },
-  8: {
+8: {
     summary:
       'قرارداد پشتیبانی و نگهداری دوره‌ای؛ بازرسی منظم، به‌روزرسانی‌ها و پیشگیری از توقف کار مجموعه.',
     details: [
@@ -136,7 +138,23 @@ const SERVICE_DETAILS: Record<number, { summary: string; details: string[]; faq:
     ],
     faq: [
       { q: 'قرارداد چقدر طول می‌کشد؟', a: 'ماهانه یا فصلی، بر اساس neva نیاز.' },
-      { q: 'چه عواقبی در صورت توقف دارد؟', a: 'از توقف کار جلوگیری می‌شود و gyors پاسخگویی امکان‌پذیر است.' },
+      { q: 'چه عواقبی در صورت توقف دارد؟', a: 'از توقف کار جلوگیری می‌شود و سریع پاسخگویی امکان‌پذیر است.' },
+    ],
+  },
+  9: {
+    summary:
+      'طراحی و توسعه وب‌سایت‌های شرکتی، پورتال‌های سازمانی و فروشگاه‌های آنلاین با تکنولوژی‌های مدرن و سئو بهینه.',
+    details: [
+      'طراحی واکنش‌گرا (Responsive) برای موبایل، تبلت و دسکتاپ.',
+      'توسعه با Next.js، React و تکنولوژی‌های مدرن وب.',
+      'سئو تکنیکی و محتوایی برای رتبه‌بندی بهتر در گوگل.',
+      'پنل مدیریت محتوا (CMS) آسان برای به‌روزرسانی توسط مشتری.',
+      'بهینه‌سازی سرعت لود و Core Web Vitals.',
+      'امنیت بالا با HTTPS، CSP وHeaders امنیتی.',
+    ],
+    faq: [
+      { q: 'زمان طراحی سایت چقدر است؟', a: 'بسته به پیچیدگی، بین ۲ تا ۶ هفته.' },
+      { q: 'آیا پس از تحویل پشتیبانی دارید؟', a: 'بله، ۳ ماه پشتیبانی رایگان و پس از آن قراردادهای نگهداری.' },
     ],
   },
 };
@@ -151,15 +169,15 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
   if (!service) {
     return {
-      title: 'خدمت یافت نشد | تونلیها',
+      title: 'خدمت یافت نشد | تونلیا',
       description: 'خدمت مورد نظر یافت نشد.',
     };
   }
 
-  const title = `${service.title} | تونلیها`;
+  const title = `${service.title} | تونلیا`;
   const description =
     service.description +
-    ' — خدمات حرفه‌ای شبکه، سرور و امنیت اطلاعات با پشتیبانی تخصصی تونلیها.';
+    ' — خدمات حرفه‌ای شبکه، سرور و امنیت اطلاعات با پشتیبانی تخصصی تونلیا.';
 
   return {
     title,
@@ -199,7 +217,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
     return (
       <section className="max-w-container mx-auto py-20 px-[5%]">
         <h1 className="text-steel font-bold text-2xl">خدمت یافت نشد</h1>
-        <p className="text-steel-muted mt-4">خدمت مورد نظر در سایت تونلیها موجود نیست.</p>
+        <p className="text-steel-muted mt-4">خدمت مورد نظر در سایت تونلیا موجود نیست.</p>
       </section>
     );
   }

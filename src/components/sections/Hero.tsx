@@ -76,7 +76,7 @@ export default function Hero() {
         ref={titleRef}
         className="mt-7 font-extrabold tracking-[-0.01em] text-steel text-[clamp(2.6rem,6vw,4.4rem)]"
       >
-        تونلیها
+        تونلیا
         <span className="visually-hidden"> — خدمات شبکه، سرور و فناوری اطلاعات</span>
       </h1>
       <p

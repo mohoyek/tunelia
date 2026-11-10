@@ -4,12 +4,12 @@ import './globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://tunelia.ir'),
-  title: 'خدمات شبکه، سرور و فناوری اطلاعات | تونلیها',
+  title: 'خدمات شبکه، سرور و فناوری اطلاعات | تونلیا',
   description:
     'پشتیبانی حرفه‌ای شبکه و سرور، امنیت اطلاعات، بکاپ‌گیری، نصب نرم‌افزارهای حسابداری و نگهداری دوره‌ای مجموعه‌ها — خدمات جامع فناوری اطلاعات برای کسب‌وکار شما',
-  authors: [{ name: 'تونلیها' }],
-  creator: 'تونلیها',
-  publisher: 'تونلیها',
+  authors: [{ name: 'تونلیا' }],
+  creator: 'تونلیا',
+  publisher: 'تونلیا',
   robots: { index: true, follow: true },
   alternates: {
     canonical: 'https://tunelia.ir/',
@@ -24,10 +24,10 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    siteName: 'تونلیها',
+    siteName: 'تونلیا',
     locale: 'fa_IR',
     url: 'https://tunelia.ir/',
-    title: 'خدمات شبکه، سرور و فناوری اطلاعات | تونلیها',
+    title: 'خدمات شبکه، سرور و فناوری اطلاعات | تونلیا',
     description:
       'پشتیبانی حرفه‌ای شبکه و سرور، امنیت اطلاعات، بکاپ‌گیری، نصب نرم‌افزارهای حسابداری و نگهداری دوره‌ای مجموعه‌ها',
     images: [
@@ -36,13 +36,13 @@ export const metadata: Metadata = {
         type: 'image/svg+xml',
         width: 1200,
         height: 630,
-        alt: 'تونلیها',
+        alt: 'تونلیا',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'خدمات شبکه، سرور و فناوری اطلاعات | تونلیها',
+    title: 'خدمات شبکه، سرور و فناوری اطلاعات | تونلیا',
     description:
       'پشتیبانی حرفه‌ای شبکه و سرور، امنیت اطلاعات، بکاپ‌گیری، نصب نرم‌افزارهای حسابداری و نگهداری دوره‌ای مجموعه‌ها',
     images: ['/og-card.svg'],

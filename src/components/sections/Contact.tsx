@@ -40,7 +40,7 @@ export default function Contact() {
     >
       <Image
         src="/tunelia-logo.png"
-        alt="تونلیها"
+        alt="تونلیا"
         width={64}
         height={64}
         className="contact-logo w-16 h-16 mx-auto mb-6 rounded-sm"

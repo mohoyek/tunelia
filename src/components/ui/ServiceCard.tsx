@@ -3,14 +3,15 @@ import type { Service } from '@/types/content';
 import IconSvg from './IconSvg';
 
 const SLUG_MAP: Record<number, string> = {
-  1: 'network',
+  1: 'backup',
   2: 'accounting',
   3: 'server',
   4: 'security',
-  5: 'backup',
+  5: 'network',
   6: 'support',
   7: 'sharing',
   8: 'maintenance',
+  9: 'web',
 };
 
 interface ServiceCardProps {
