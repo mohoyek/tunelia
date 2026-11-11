@@ -70,7 +70,7 @@ export default function Hero() {
       />
       <span ref={eyebrowRef} className="eyebrow-code">
         <span className="dot" />
-        NevDev / IT SERVICES
+        TUNELIA / IT SERVICES
       </span>
       <h1
         ref={titleRef}

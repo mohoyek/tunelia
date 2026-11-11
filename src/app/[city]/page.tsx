@@ -1,16 +1,8 @@
 import type { Metadata } from 'next';
 import { cities } from '@/data/cities';
 import { services } from '@/data/services';
-import { professionalServiceJsonLd, webSiteJsonLd, organizationJsonLd } from '@/lib/metadata';
-import Image from 'next/image';
+import { getSlugById } from '@/lib/serviceSlugs';
 import IconSvg from '@/components/ui/IconSvg';
-
-const CITY_TO_ID: Record<string, number> = {
-  dezful: 1,
-  shush: 2,
-  andimeshk: 3,
-  khuzestan: 4,
-};
 
 export async function generateStaticParams() {
   return cities.map((city) => ({ city: city.slug }));
@@ -42,9 +34,9 @@ export async function generateMetadata({ params }: { params: { city: string } })
       type: 'website',
       images: [
         {
-          url: '/tunelia-logo.png',
-          width: 640,
-          height: 360,
+          url: '/og-card.png',
+          width: 1200,
+          height: 630,
           alt: `${city.name} - تونلیا`,
         },
       ],
@@ -53,7 +45,7 @@ export async function generateMetadata({ params }: { params: { city: string } })
       card: 'summary_large_image',
       title,
       description,
-      images: ['/tunelia-logo.png'],
+      images: ['/og-card.png'],
     },
   };
 }
@@ -83,18 +75,7 @@ export default function CityPage({ params }: { params: { city: string } }) {
 
       <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-px bg-line border border-line mb-16">
         {services.map((service) => {
-          const slugMap: Record<number, string> = {
-            1: 'backup',
-            2: 'accounting',
-            3: 'server',
-            4: 'security',
-            5: 'network',
-            6: 'support',
-            7: 'sharing',
-            8: 'maintenance',
-            9: 'web',
-          };
-          const slug = slugMap[service.id] || service.id.toString();
+          const slug = getSlugById(service.id);
           return (
             <a
               key={service.id}
@@ -130,10 +111,10 @@ export default function CityPage({ params }: { params: { city: string } }) {
             تلگرام: mohoyek@
           </a>
           <a
-            href="mailto:info@tunelia.com"
+            href="mailto:info@tunelia.ir"
             className="block bg-accent-soft border border-accent-line text-accent px-5 py-3 text-[0.95rem] font-medium rounded-[2px] text-center hover:bg-accent transition-colors"
           >
-            info@tunelia.com
+            info@tunelia.ir
           </a>
           <a
             href="tel:+989013365949"

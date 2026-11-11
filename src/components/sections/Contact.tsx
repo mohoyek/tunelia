@@ -59,8 +59,8 @@ export default function Contact() {
         >
           تلگرام: mohoyek@
         </ContactButton>
-        <ContactButton href="mailto:info@tunelia.com" icon={MailIcon}>
-          info@tunelia.com
+        <ContactButton href="mailto:info@tunelia.ir" icon={MailIcon}>
+          info@tunelia.ir
         </ContactButton>
         <ContactButton href="tel:+989013365949" icon={PhoneIcon}>
           <span dir="ltr">0901&nbsp;336&nbsp;5949</span>

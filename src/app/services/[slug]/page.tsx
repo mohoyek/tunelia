@@ -1,167 +1,161 @@
 import type { Metadata } from 'next';
 import { services } from '@/data/services';
 import { professionalServiceJsonLd, webSiteJsonLd, breadcrumbJsonLd } from '@/lib/metadata';
-import Image from 'next/image';
+import { SLUG_TO_ID, ID_TO_SLUG, getAllSlugs } from '@/lib/serviceSlugs';
 import IconSvg from '@/components/ui/IconSvg';
 
-const SLUG_TO_ID: Record<string, number> = {
-  network: 1,
-  accounting: 2,
-  server: 3,
-  security: 4,
-  backup: 5,
-  support: 6,
-  sharing: 7,
-  maintenance: 8,
-  web: 9,
-};
-
-const ID_TO_SLUG: Record<number, string> = {
-  1: 'backup',
-  2: 'accounting',
-  3: 'server',
-  4: 'security',
-  5: 'network',
-  6: 'support',
-  7: 'sharing',
-  8: 'maintenance',
-  9: 'web',
-};
+export async function generateStaticParams() {
+  return getAllSlugs().map((slug) => ({ slug }));
+}
 
 const SERVICE_DETAILS: Record<number, { summary: string; details: string[]; faq: { q: string; a: string }[] }> = {
   1: {
-    summary:
-      'راه‌اندازی و پشتیبانی شبکه‌های کامپیوتری سازمانی با تجهیزات معتبر و قابلیت ergänzt، از کابل‌کشی تا سوییچ و روتر.',
+    summary: 'راه‌اندازی، نظارت و بازیابی بکاپ‌گیری داده‌های حیاتی سازمانی با سیاست‌های نگهداری انعطاف‌پذیر و تست دوره‌ای بازیابی.',
     details: [
-      'طراحی-topولوجيا شبکه بر اساس تعداد کاربران و نیازهای سازمانی.',
-      'راه‌اندازی سوییچ، روتر و تجهیزات شبکه با برندهای Cisco و MikroTik.',
-      'پیکربندی VLAN، DHCP، DNS وrietِ دسترسی.',
-      'پشتیبانی مستمر شبکه و رفع سریع गिरه در disconnected.',
+      'پیکربندی بکاپ‌گیری خودکار روزانه/هفتگی با Veeam، Veritas یا اسکریپت‌های سفارشی.',
+      'ذخیره در مقاصد متنوع: NAS محلی، استوریج ابری (S3، Azure Blob)، نوار مغناطیسی.',
+      'شامل بکاپ کامل، افزایشی و تفاضلی با سیاست نگهداری (GFS) قابل تنظیم.',
+      'تست بازیابی ماهانه و گزارش WORM برای اطمینان از یکپارچگی داده.',
+      'پشتیبانی از ماشین‌های مجازی (VMware/Hyper-V)، دیتابیس (SQL، PostgreSQL، Oracle) و فایل‌سرورها.',
+      'رمزنگاری AES-256 در حال انتقال و در حالت استراحت، احراز هویت چندعاملی برای کنسول مدیریت.',
     ],
     faq: [
-      { q: 'چه تجهیزاتی برای شبکه سازمانی نیاز است؟', a: 'روتر، سوییچ، کابل‌های شبکه،Patch Panel و تجهیزات Wi-Fi در صورت نیاز.' },
-      { q: 'زمان راه‌اندازی شبکه چقدر است؟', a: 'بسته به اندازه شبکه، بین ۲ تا ۷ روز کاری طول می‌کشد.' },
+      { q: 'بازگشت به کدام نقطه زمانی امکان‌پذیر است؟', a: 'هر نقطه در بازه نگهداری (روزانه تا سالانه) با RPO نزدیک به صفر.' },
+      { q: 'آیا بکاپ ابری امن است؟', a: 'بله، با رمزنگاری سمت کلاینت و کلید مدیریت توسط مشتری (BYOK).' },
+      { q: 'زمان بازیابی چقدر طول می‌کشد؟', a: 'بسته به حجم، از چند دقیقه (فایل) تا چند ساعت (VM کامل).' },
     ],
   },
   2: {
-    summary:
-      'نصب، راه‌اندازی و پشتیبانی نرم‌افزارهای حسابداری و مالی (هلو، سپیدار، پارسا و غیره) با آموزش کاربران.',
+    summary: 'پیاده‌سازی حسابداری شبکه (AAA) با RADIUS/TACACS+ برای کنترل دسترسی متمرکز، لاگ‌گیری حسابرسی و انطباق با استانداردها.',
     details: [
-      'نصب نرم‌افزارهای حسابداری روی سرور یا کامپیوتر کاربری.',
-      'پیکربندی شبکه کاربری و دسترسی‌ها.',
-      'آموزش کاربران برای کار با نرم‌افزار.',
-      'پشتیبانی و رفع مشکلات نرم‌افزاری در مستقبل.',
+      'نصب و پیکربندی سرور RADIUS (Cisco ISE، Aruba ClearPass، FreeRADIUS، Microsoft NPS).',
+      'احراز هویت ۸۰۲.۱X برای وایرلس و وایر، MAB برای دستگاه‌های بدون Supplicant.',
+      'احراز هویت چندعاملی (MFA) با توکن سخت‌افزاری، Push، SMS یا WebAuthn.',
+      'احراز هویت مجوزها بر اساس گروه AD/LDAP، VLAN پویا و ACL دانلودشده.',
+      'حسابرسی کامل: لاگ ورود/خروج، تغییرات پیکربندی، شکست‌های احراز هویت با نگهداری ۱ سال.',
+      'انطباق با ISO 27001، PCI-DSS و مقررات داخلی سازمان.',
     ],
     faq: [
-      { q: 'کدام نرم‌افزار حسابداری پشتیبانی می‌کنید؟', a: 'هلو، سپیدار، پارسا و سایر نرم‌افزارهای حسابداری رایج در ایران.' },
-      { q: 'آیا آموزش داده می‌شود؟', a: 'بله، آموزش اولیه به کاربران شامل است.' },
+      { q: 'تفاوت RADIUS و TACACS+ چیست؟', a: 'RADIUS برای AAA شبکه (احراز/مجوز/حسابداری) و TACACS+ برای مدیریت دستگاه (CLI) با رمزنگاری کامل پکت.' },
+      { q: 'آیا می‌توان با Azure AD یکپارچه شد؟', a: 'بله، از طریق SAML/OIDC یا Azure MFA Extension برای NPS.' },
+      { q: 'چگونه دسترسی مهمان کنترل می‌شود؟', a: 'پورتال مهمان (Guest Portal) با تأیید SMS/ایمیل، VLAN جداگانه و انقضای خودکار.' },
     ],
   },
   3: {
-    summary:
-      'راه‌اندازی و مدیریت سرورهای ویندوز و لینوکس، مدیریت کاربران و دسترسی‌ها، بهینه‌سازی و پایش مستمر.',
+    summary: 'راه‌اندازی، امن‌سازی و بهینه‌سازی سرورهای ویندوز و لینوکس برای میزبانی کاربردهای سازمانی با تسلط بر مجازی‌سازی و کانتینر.',
     details: [
-      'نصب و پیکربندی Windows Server و Linux.',
-      'تنظیم Active Directory و دسترسی کاربران.',
-      'پایش مستمر سرور و ارسال هشدار در صورت خطا.',
-      'بهینه‌سازی منابع سرور برای افزایش سرعت.',
+      'نصب و سخت‌سازی OS (Windows Server 2019/2022، RHEL، Ubuntu LTS، Debian) بر اساس CIS Benchmarks.',
+      'مجازی‌سازی با Hyper-V، VMware vSphere یا Proxmox؛ خوشه HA و DRS.',
+      'کانتینرها با Docker، Podman و ارکستراسیون Kubernetes (RKE2، kubeadm، AKS/EKS/GKE).',
+      'پیکربندی ذخیره‌سازی: iSCSI، NFS، Ceph، Storage Spaces Direct، multipathing.',
+      'مونیتورینگ و هشداردهی: Zabbix، Prometheus+Grafana، Windows Exporter، Node Exporter.',
+      'اتوماسیون با Ansible، PowerShell DSC، Terraform برای IaC.',
     ],
     faq: [
-      { q: 'کدام سرور مناسب است؟', a: 'Windows Server برای محیط‌های مایکروسیافت و Linux برای وب و پایگاه داده.' },
-      { q: 'آیا پایش ۲۴ ساعته است؟', a: 'بله، پایش موقت و دائمی بر اساس قرارداد قابل انجام است.' },
+      { q: 'سرور فیزیکی یا مجازی بهتر است؟', a: 'مجازی برای انعطاف و HA؛ فیزیکی برای لایسنس‌های گران، GPU یا latency حساس.' },
+      { q: 'پچ‌گری امنیتی چگونه مدیریت می‌شود؟', a: 'چرخه ماهانه با WSUS/Apt/Yum/DNF، تست در استیجینگ، رول‌بک خودکار در صورت خطا.' },
+      { q: 'آیا مهاجرت از VMware به Hyper-V امکان‌پذیر است؟', a: 'بله، با ابزارهای StarWind V2V، Microsoft MVMC یا کانتینر. زمان‌بندی در پنجره حفظ.' },
     ],
   },
   4: {
-    summary:
-      'تأمین امنیت شبکه و سرور با فایروال، کنترل دسترسی و شناسایی آسیب‌پذیری‌ها در برابر حملات امنیتی.',
+    summary: 'معماری دفاع در عمق: فایروال لایه ۳–۷، IPS/IDS، WAF، امنیت ایمیل، Segment و مدیریت رخداد (SIEM/SOAR).',
     details: [
-      'نصب و پیکربندی فایروال سخت‌افزاری و نرم‌افزاری.',
-      'راه‌اندازی VPN امن برای دسترسی ریموت.',
-      'اسکن آسیب‌پذیری و اصلاح آن.',
-      'پایش ترافیک شبکه برای تشخیص تهدیدات.',
+      'فایروال Next-Gen: Palo Alto، FortiGate، Cisco Firepower، Sophos XG، OPNsense — با App-ID، SSL Decryption، Threat Prevention.',
+      'IPS/IDS شبکه و هاست: Suricata، Zeek، CrowdSec، Wazuh Agent.',
+      'WAF برای وب‌اپلیکیشن: ModSecurity، Coraza، Cloudflare WAF، Azure Front Door WAF.',
+      'امنیت ایمیل: DMARC/DKIM/SPF، Proofpoint، Microsoft Defender for Office 365، SpamAssassin.',
+      'Segmentation: Zero Trust با MikroTik/Cisco، VRF، VXLAN، Cisco TrustSec، SD-Access.',
+      'SIEM: Splunk، Elastic، Wazuh Manager، Graylog — قانون‌های MITRE ATT&CK، UEBA، SOAR با Shuffle/Cortex XSOAR.',
     ],
     faq: [
-      { q: 'آیا فایروال سخت‌افزاری نصب می‌کنید؟', a: 'بله، نصب و پیکربندی فایروال‌های Cisco، MikroTik و دیگران.' },
-      { q: 'آیا امنیت برای سرور هم ارائه می‌شود؟', a: 'بله، امنیت شبکه و سرور به صورت یکپارچه طراحی می‌شود.' },
+      { q: 'تفاوت IPS و IDS چیست؟', a: 'IDS فقط شناسایی و هشدار می‌دهد؛ IPS در خط داده سیت و جلوی ترافیک مخرب را می‌گیرد.' },
+      { q: 'آیا SSL Decryption قانونی است؟', a: 'بله، با سیاست سازمانی، گواهی ریشه داخلی و استثناهای بانکی/پزشکی.' },
+      { q: 'Zero Trust از کجا آغاز شود؟', a: 'شناسایی موجودیت (Identity)، بررسی سلامت دستگاه (Device Health) و کمینه‌سازی سطح حمله (Micro-segmentation).' },
     ],
   },
   5: {
-    summary:
-      'پیاده‌سازی بکاپ‌گیری خودکار و بازیابی اطلاعات تا هیچ خرابی یا خطایی به نابودی داده‌های شما منجر نشود.',
+    summary: 'طراحی، پیاده‌سازی و پشتیبانی شبکه‌های LAN/WAN/Wi-Fi سازمانی با تجهیزات Cisco، MikroTik، Ubiquiti و Aruba از لایه فیزیکی تا هسته.',
     details: [
-      'راه‌اندازی بکاپ‌گیری خودکار روزانه و هفته‌ای.',
-      'ذخیره بکاپ در NAS یا ابری.',
-      'تست منظم بازیابی اطلاعات.',
-      'بازار بازی سریع در صورت خطای سیستم.',
+      'توپولوژی: Core-Distribution-Access، Collapsed Core، Leaf-Spine برای دیتاسنتر.',
+      'سوییچینگ: VLAN، Trunk، LACP، Stacking/VSS/VCF، Spanning Tree (RSTP/MSTP)، Storm Control.',
+      'مسیردهی: OSPF، EIGRP، BGP، Static، VRF-Lite، Policy-Based Routing، Route Redistribution.',
+      'وایرلس: Site Survey (Ekahau)، کنترلر WLC/Cloud، Roaming 802.11r/k/v، WPA3-Enterprise، RF Profiling.',
+      'WAN: MPLS، SD-WAN (Meraki، FortiGate SD-WAN، Viptela)، IPsec/GRE/DMVPN، QoS برای صدا/ویدیو.',
+      'مستندسازی: NetBox، Visio، IPAM، Runbookهای disaster recovery.',
     ],
     faq: [
-      { q: 'بکاپ کجا ذخیره می‌شود؟', a: 'در NAS محلی و/یا 저장 ابری بر اساس نیازمندی.' },
-      { q: 'آیا بازیابی تست می‌شود؟', a: 'بله، تست دوره‌ای بازیابی برای اطمینان از صحت بکاپ انجام می‌گیرد.' },
+      { q: 'معدات پیشنهادی برای ۲۰۰ کاربر چیست؟', a: 'Core: ۲× Catalyst 9500/9400؛ Access: ۹۵۰۰/۹۳۰۰ PoE+؛ Wireless: Catalyst 9130/9120 یا Meraki MR.' },
+      { q: 'SD-WAN یا MPLS؟', a: 'SD-WAN ارزان‌تر و چابک‌تر؛ MPLS برای SLA تضمینی و jitter پایین. ترکیبی رایج است.' },
+      { q: 'چگونه پوشش وایرلس تضمین می‌شود؟', a: 'Site Survey پیش/پس از اجرا، تنظیم TX Power/Channel Plan، اعتبارسنجی با Ekahau Sidekick.' },
     ],
   },
   6: {
-    summary:
-      'بررسی و رفع سریع مشکلات سیستم و شبکه با پشتیبانی فنی پاسخگو، در دسترس و متخصص.',
+    summary: 'پشتیبانی سطح ۱ تا ۳، مانیتورینگ ۲۴/۷، پاسخ رویداد، مدیریت تغییر و قراردادهای SLA برای زیرساخت IT پایدار.',
     details: [
-      'تشخیص سریع потеря اتصال شبکه.',
-      'راه‌اندازی مجدد سرویس‌های متوقف شده.',
-      'راهنمایی ریموت و حضوری برای رفع مشکل.',
-      'پشتیبانی ۲۴/۷ بر اساس درخواست.',
+      'دسک سرویس (ServiceNow/Jira/GLPI): دسته‌بندی رویداد، اولویت، اسکالشن، SLA (Response/Resolution).',
+      'مانیتورینگ پیشگیرانه: زنده‌بودن سرویس، دیسک، CPU، حافظه، بکاپ، گواهی SSL، انقضای لایسنس.',
+      'مدیریت پچ: WSUS، SCCM/Intune، Ansible، یارانه‌های امنیتی ماهانه Microsoft/Red Hat.',
+      'تغییرات: CAB هفتگی، RFC، rollback plan، تست در استیجینگ، اطلاع‌رسانی stakeholders.',
+      'مستندات: Network Diagram، IPAM، Password Vault (Bitwarden/1Password/Thycotic)، Runbook DR.',
+      'آموزش و انتقال دانش: جلسات QBR، اسناد هانداوفر، تمارین بازیابی فاجعه.',
     ],
     faq: [
-      { q: 'زمان پاسخگویی چقدر است؟', a: 'پاسخگویی زودتر از ۴ ساعت در ساعات اداری.' },
-      { q: 'آیا پشتیبانی ریموت دارید؟', a: 'بله، با ابزارهای ریموت دوست دوستانه.' },
+      { q: 'تفاوت L1/L2/L3 چیست؟', a: 'L1: تریاژ و کلاس؛ L2: عیب‌یابی تخصصی؛ L3: مهندسی/معماری و توسعه.' },
+      { q: 'SLA معمول ۹۹.۹٪ چگونه محاسبه می‌شود؟', a: 'دسترس‌پذیری سالانه: ۸.۷۶ ساعت downtime مجاز. محاسبه روی سرویس‌های کریتیکال.' },
+      { q: 'آیا پشتیبانی دورکاری کامل است؟', a: 'بله، با VPN مخصوص، Jump Host، PAM و جلسات رکوردشده. روی‌سایت در صورت لزوم.' },
     ],
   },
   7: {
-    summary:
-      'اشتراک‌گذاری فایل، پرینتر و منابع بین سیستم‌ها با سطح دسترسی مناسب، مرتب و امن.',
+    summary: 'راه‌اندازی اشتراک‌گذاری امن فایل، پرینتر و منبع شبکه با کنترل دسترسی بر پایه حداقل امتیاز و حسابرسی کامل.',
     details: [
-      'راه‌اندازی اشتراک فایل بین کامپیوترها.',
-      'اشتراک‌گذاری پرینتر شبکه.',
-      'تنظیم سطوح دسترسی به فولدرها.',
-      'مرتب و امن نگهداری منابع مشترک.',
+      'فایل‌سرور: Windows File Server (SMB 3.1.1، DFS-R، FSRM Quota/File Screen)، Samba/AD DC، TrueNAS (ZFS، SMB/NFS/iSCSI).',
+      'کنترل دسترسی: NTFS ACL، DACL/SACL، Dynamic Access Control، Claims-based، ABAC.',
+      'پرینتر: Print Server متمرکز، Driver Management، Pull Printing (UniFlow، PaperCut، YSoft)، Find-Me Print.',
+      'موبایل/ریموت: WebDAV، Nextcloud، SharePoint/OneDrive Sync، VPN + Mapped Drive.',
+      'حیثیت و پیشگیری از نشت: FSRM File Screen، DLP (Microsoft Purview، OpenDLP)، Watermarking، RMS/AIP.',
+      'حسابرسی: فعال‌سازی SACL، لاگ ۴۶۶۳/۴۶۷۰، ارسال به SIEM، گزارش ماهانه دسترسی‌های پرiviliged.',
     ],
     faq: [
-      { q: 'آیا می‌توان دسترسی را محدود کرد؟', a: 'بله، سطوح دسترسی برای هر کاربر یا گروه قابل تنظیم است.' },
-      { q: 'آیا پرینتر شبکه مشمول است؟', a: 'بله، اشتراک‌گذاری پرینتر شبکه شامل است.' },
+      { q: 'DFS-R یا DFS-N؟', a: 'DFS-N: namespace واحد، referrals. DFS-R: replication 멀تی‌مستر. هر دو ترکیبی برای HA.' },
+      { q: 'چگونه از Ransomware در Share محافظت کنیم؟', a: 'Blocklist اکستنشن‌های مخرب، FSRM Quota سخت، Versioning، Backup immutable، Canary files.' },
+      { q: 'Pull Printing چیست؟', a: 'کاربر چاپ می‌کند، در هر پرینتر با کارت/پین/موبایل آزاد می‌کند. کاهش ضایعه و امنیت.' },
     ],
   },
-8: {
-    summary:
-      'قرارداد پشتیبانی و نگهداری دوره‌ای؛ بازرسی منظم، به‌روزرسانی‌ها و پیشگیری از توقف کار مجموعه.',
+  8: {
+    summary: 'قراردادهای نگهداری پیشگیرانه و اصلاحی ماهانه/فصلی: بازرسی سخت‌افزاری، به‌روزرسانی فیم‌ور/OS، تمیزکاری، تست بکاپ و گزارش‌دهی.',
     details: [
-      'قرارداد ماهانه یا فصلی پشتیبانی.',
-      'بازرسی منظم تجهیزات و نرم‌افزارها.',
-      'به‌روزرسانی امنیتی و سیستم.',
-      'پیشگیری از توقف کار با نگهداری پیشگیرانه.',
+      'بازرسی فیزیکی: دمای سرور، فن‌ها، منبع تغذیه، کابل‌کشی، برچسب‌گذاری، UPS/باتری، راک پچ.',
+      'فیم‌ور/BIOS/DRAC/iLO/iDRAC: به‌روزرسانی امن، تنظیمات امنیتی، گواهی SSL مدیریت.',
+      'پچ OS و اپلیکیشن: ماهانه با تست پیشین، مدیریت lifecycle درایورها.',
+      'تست بکاپ: بازیابی نمونه فایل/VM، چک checksum، تأیید RPO/RTO.',
+      'مانیتورینگ پیشگیرانه: تحلیل ترند سهمیه دیسک، SMART دیسک، هشدار پیش‌بینانه (Predictive Failure).',
+      'گزارش: چک‌لیست امضا شده، عکس‌های قبل/بعد، پیشنهادهای ارتقا، امتیازدهی ریسک.',
     ],
     faq: [
-      { q: 'قرارداد چقدر طول می‌کشد؟', a: 'ماهانه یا فصلی، بر اساس neva نیاز.' },
-      { q: 'چه عواقبی در صورت توقف دارد؟', a: 'از توقف کار جلوگیری می‌شود و سریع پاسخگویی امکان‌پذیر است.' },
+      { q: 'تفاوت پیشگیرانه و اصلاحی چیست؟', a: 'پیشگیرانه: برنامه‌ریزی، دوره‌ای، جلوگیری. اصلاحی: واکنش به خرابی، جایگزینی قطعه، Troubleshooting.' },
+      { q: 'چقدر طول می‌کشد؟', a: 'بسته به تعداد سرور/دستگاه، ۲–۸ ساعت در سایت. پنجره حفظ (معمولاً شب/آخر هفته).' },
+      { q: 'آیا قطعات یدکی تامین می‌شود؟', a: 'سبد یدکی (Spare Pool) در قراردادهای سطح بالا شامل می‌شود یا SLA تامین <۴ ساعت.' },
     ],
   },
   9: {
-    summary:
-      'طراحی و توسعه وب‌سایت‌های شرکتی، پورتال‌های سازمانی و فروشگاه‌های آنلاین با تکنولوژی‌های مدرن و سئو بهینه.',
+    summary: 'طراحی و توسعه وب‌سایت‌های شرکتی، پورتال سازمانی و فروشگاه آنلاین با Next.js، React، سئو تکنیکی، CMS(headless) و بهینه‌سازی Core Web Vitals.',
     details: [
-      'طراحی واکنش‌گرا (Responsive) برای موبایل، تبلت و دسکتاپ.',
-      'توسعه با Next.js، React و تکنولوژی‌های مدرن وب.',
-      'سئو تکنیکی و محتوایی برای رتبه‌بندی بهتر در گوگل.',
-      'پنل مدیریت محتوا (CMS) آسان برای به‌روزرسانی توسط مشتری.',
-      'بهینه‌سازی سرعت لود و Core Web Vitals.',
-      'امنیت بالا با HTTPS، CSP وHeaders امنیتی.',
+      'معماری: Next.js 14 App Router (RSC، Streaming، Server Actions)، TypeScript، Tailwind CSS.',
+      'رندرینگ: SSR/ISR/SSG ترکیبی، Edge Runtime برای latency پایین، Middleware برای i18n/Auth.',
+      'CMS: Sanity، Contentful، Strapi، Payload یا WordPress Headless با Preview Mode.',
+      'سئو: JSON-LD (Organization, WebSite, Product, Breadcrumb)، Sitemap.xml، Robots.txt، Canonical، hreflang، OG/Twitter.',
+      'عملکرد: Image Optimization (next/image)، Font Optimization، Code Splitting، Prefetching، LCP < 2.5s، CLS < 0.1، INP < 200ms.',
+      'دسترسی‌پذیری: WCAG 2.1 AA، Semantic HTML، ARIA، Focus Management، RTL کامل، Contrast Ratio.',
+      'امنیت: CSP، HSTS، Referrer-Policy، Permissions-Policy، Rate Limiting، WAF، Dependency Scanning (Snyk/Dependabot).',
+      'دیپلوی: Vercel/Netlify/Cloudflare Pages، CI/CD با GitHub Actions، Preview Deployments، Rollback فوری.',
     ],
     faq: [
-      { q: 'زمان طراحی سایت چقدر است؟', a: 'بسته به پیچیدگی، بین ۲ تا ۶ هفته.' },
-      { q: 'آیا پس از تحویل پشتیبانی دارید؟', a: 'بله، ۳ ماه پشتیبانی رایگان و پس از آن قراردادهای نگهداری.' },
+      { q: 'زمان تحویل یک سایت شرکتی چقدر است؟', a: '۴–۸ هفته بسته به تعداد صفحات، پیچیدگی CMS، یکپارچه‌سازی‌ها و محتوای موجود.' },
+      { q: 'آیا پس از تحویل پشتیبانی دارید؟', a: 'بله، ۳ ماه پشتیبانی رایگان (باگ، محتوای جزئی، مانیتورینگ CWV). پس از آن قرارداد نگهداری ماهانه.' },
+      { q: 'مهاجرت از وردپرس کلاسیک امکان‌پذیر است؟', a: 'بله، با WPGraphQL/REST API، اسکریپت مهاجر محتوا، Redirect Map ۳۰۱، حفظ سئو.' },
     ],
   },
 };
-
-export async function generateStaticParams() {
-  return Object.entries(SLUG_TO_ID).map(([slug]) => ({ slug }));
-}
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const serviceId = SLUG_TO_ID[params.slug];
@@ -192,9 +186,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       type: 'website',
       images: [
         {
-          url: '/tunelia-logo.png',
-          width: 640,
-          height: 360,
+          url: '/og-card.png',
+          width: 1200,
+          height: 630,
           alt: service.title,
         },
       ],
@@ -203,7 +197,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       card: 'summary_large_image',
       title,
       description,
-      images: ['/tunelia-logo.png'],
+      images: ['/og-card.png'],
     },
   };
 }
@@ -236,7 +230,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           ),
         }}
       />
-      <nav className="mb-12" aria-label="نمای nurture">
+      <nav className="mb-12" aria-label="مسیر صفحه">
         <ol className="flex items-center gap-2 text-[0.85rem] text-steel-muted font-mono">
           <li>
             <a href="/" className="hover:text-accent transition-colors">
@@ -245,7 +239,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           </li>
           <li>/</li>
           <li>
-            <a href="#services" className="hover:text-accent transition-colors">
+            <a href="/#services" className="hover:text-accent transition-colors">
               خدمات
             </a>
           </li>
@@ -300,10 +294,10 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                 تلگرام: mohoyek@
               </a>
               <a
-                href="mailto:info@tunelia.com"
+                href="mailto:info@tunelia.ir"
                 className="block bg-accent-soft border border-accent-line text-accent px-5 py-3 text-[0.95rem] font-medium rounded-[2px] text-center hover:bg-accent transition-colors"
               >
-                info@tunelia.com
+                info@tunelia.ir
               </a>
               <a
                 href="tel:+989013365949"
