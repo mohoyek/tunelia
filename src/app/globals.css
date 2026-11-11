@@ -3,18 +3,19 @@
 @tailwind utilities;
 
 :root {
-  --ink: #0a0c0e;
-  --panel: #12161a;
-  --panel-2: #181d22;
-  --line: #262d34;
-  --line-soft: #1c2228;
-  --steel: #e8eaec;
-  --steel-muted: #8b949c;
-  --steel-dim: #565f68;
+  --ink: #0b0e12;
+  --panel: #12171d;
+  --panel-2: #171d24;
+  --line: #232b34;
+  --line-soft: #181e25;
+  --steel: #e9ebee;
+  --steel-muted: #97a0a8;
+  --steel-dim: #5d666f;
   --accent: #d1802c;
-  --accent-soft: #3a2a18;
-  --accent-line: #5c3f1f;
-  --radius: 2px;
+  --accent-bright: #f0993f;
+  --accent-soft: rgba(209, 128, 44, 0.1);
+  --accent-line: rgba(209, 128, 44, 0.32);
+  --radius: 14px;
   --font-vazirmatn: 'Vazirmatn', Tahoma, sans-serif;
   --font-jetbrains-mono: 'JetBrains Mono', monospace;
 }
@@ -74,33 +75,7 @@ button:focus-visible {
   font-family: var(--font-jetbrains-mono), monospace;
 }
 
-.marked {
-  position: relative;
-}
-
-.marked::before,
-.marked::after {
-  content: '';
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  pointer-events: none;
-}
-
-.marked::before {
-  top: -1px;
-  right: -1px;
-  border-top: 2px solid var(--accent);
-  border-right: 2px solid var(--accent);
-}
-
-.marked::after {
-  bottom: -1px;
-  left: -1px;
-  border-bottom: 2px solid var(--accent);
-  border-left: 2px solid var(--accent);
-}
-
+/* ---------- چیپ مونوی بالای عنوان‌ها ---------- */
 .eyebrow-code {
   display: inline-flex;
   align-items: center;
@@ -108,11 +83,11 @@ button:focus-visible {
   font-family: var(--font-jetbrains-mono), monospace;
   font-size: 0.78rem;
   letter-spacing: 0.04em;
-  color: var(--accent);
+  color: var(--accent-bright);
   border: 1px solid var(--accent-line);
   background: var(--accent-soft);
-  padding: 0.4rem 1rem;
-  border-radius: var(--radius);
+  padding: 0.4rem 1.1rem;
+  border-radius: 999px;
   direction: ltr;
 }
 
@@ -120,7 +95,7 @@ button:focus-visible {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--accent-bright);
   display: inline-block;
   animation: pulse 2.4s ease-in-out infinite;
 }
@@ -130,28 +105,107 @@ button:focus-visible {
   50% { opacity: 0.35; }
 }
 
+/* ---------- سرصفحه سکشن‌ها ---------- */
 .section-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 2.4rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--line);
-  flex-wrap: wrap;
+  margin-bottom: 2.6rem;
 }
 
 .section-head h2 {
-  font-size: 1.7rem;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--steel);
 }
 
-.section-head .idx {
-  font-family: var(--font-jetbrains-mono), monospace;
-  font-size: 0.8rem;
-  color: var(--steel-dim);
-  direction: ltr;
+/* ---------- گلو شعاعی ملایم پشت سکشن‌ها ---------- */
+.glow-top {
+  position: relative;
+}
+
+.glow-top::before {
+  content: '';
+  position: absolute;
+  inset: -80px 0 auto 0;
+  height: 460px;
+  pointer-events: none;
+  background: radial-gradient(ellipse 55% 100% at 50% 0%, rgba(209, 128, 44, 0.09), transparent 70%);
+}
+
+.glow-center {
+  position: relative;
+}
+
+.glow-center::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 60% 55% at 50% 45%, rgba(209, 128, 44, 0.07), transparent 72%);
+}
+
+/* ---------- ظاهر شدن ظریف هنگام اسکرول ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- شماره فانتوم کاشی‌ها ---------- */
+.ghost-num {
+  position: absolute;
+  top: 0.6rem;
+  left: 1.1rem;
+  font-size: 4.6rem;
+  font-weight: 800;
+  line-height: 1;
+  color: rgba(233, 235, 238, 0.055);
+  user-select: none;
+  pointer-events: none;
+  letter-spacing: -0.02em;
+}
+
+/* ---------- دکمه‌ها ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.9rem;
+  border-radius: var(--radius);
+  font-size: 0.98rem;
+  font-weight: 600;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #191008;
+  box-shadow: 0 6px 28px -10px rgba(209, 128, 44, 0.55);
+}
+
+.btn-primary:hover {
+  background: var(--accent-bright);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 34px -10px rgba(209, 128, 44, 0.65);
+}
+
+.btn-ghost {
+  background: var(--panel);
+  color: var(--steel);
+  border: 1px solid var(--line);
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent-line);
+  background: var(--panel-2);
+  transform: translateY(-2px);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,46 +1,24 @@
 import type { Metadata } from 'next';
 import { services } from '@/data/services';
-import { professionalServiceJsonLd, webSiteJsonLd, breadcrumbJsonLd } from '@/lib/metadata';
+import { breadcrumbJsonLd } from '@/lib/metadata';
+import { SLUG_TO_ID, ID_TO_SLUG } from '@/lib/serviceSlugs';
 import Image from 'next/image';
+import Link from 'next/link';
 import IconSvg from '@/components/ui/IconSvg';
-
-const SLUG_TO_ID: Record<string, number> = {
-  network: 1,
-  accounting: 2,
-  server: 3,
-  security: 4,
-  backup: 5,
-  support: 6,
-  sharing: 7,
-  maintenance: 8,
-  web: 9,
-};
-
-const ID_TO_SLUG: Record<number, string> = {
-  1: 'backup',
-  2: 'accounting',
-  3: 'server',
-  4: 'security',
-  5: 'network',
-  6: 'support',
-  7: 'sharing',
-  8: 'maintenance',
-  9: 'web',
-};
 
 const SERVICE_DETAILS: Record<number, { summary: string; details: string[]; faq: { q: string; a: string }[] }> = {
   1: {
     summary:
-      'راه‌اندازی و پشتیبانی شبکه‌های کامپیوتری سازمانی با تجهیزات معتبر و قابلیت ergänzt، از کابل‌کشی تا سوییچ و روتر.',
+      'پیاده‌سازی بکاپ‌گیری خودکار و بازیابی اطلاعات تا هیچ خرابی یا خطایی به نابودی داده‌های شما منجر نشود.',
     details: [
-      'طراحی-topولوجيا شبکه بر اساس تعداد کاربران و نیازهای سازمانی.',
-      'راه‌اندازی سوییچ، روتر و تجهیزات شبکه با برندهای Cisco و MikroTik.',
-      'پیکربندی VLAN، DHCP، DNS وrietِ دسترسی.',
-      'پشتیبانی مستمر شبکه و رفع سریع गिरه در disconnected.',
+      'راه‌اندازی بکاپ‌گیری خودکار روزانه و هفته‌ای.',
+      'ذخیره بکاپ در NAS یا فضای ابری، بر اساس نیاز شما.',
+      'تست منظم بازیابی اطلاعات.',
+      'بازیابی سریع در صورت خطای سیستم.',
     ],
     faq: [
-      { q: 'چه تجهیزاتی برای شبکه سازمانی نیاز است؟', a: 'روتر، سوییچ، کابل‌های شبکه،Patch Panel و تجهیزات Wi-Fi در صورت نیاز.' },
-      { q: 'زمان راه‌اندازی شبکه چقدر است؟', a: 'بسته به اندازه شبکه، بین ۲ تا ۷ روز کاری طول می‌کشد.' },
+      { q: 'بکاپ کجا ذخیره می‌شود؟', a: 'در NAS محلی و/یا فضای ابری، بر اساس نیاز شما.' },
+      { q: 'آیا بازیابی تست می‌شود؟', a: 'بله، تست دوره‌ای بازیابی برای اطمینان از صحت بکاپ انجام می‌گیرد.' },
     ],
   },
   2: {
@@ -50,7 +28,7 @@ const SERVICE_DETAILS: Record<number, { summary: string; details: string[]; faq:
       'نصب نرم‌افزارهای حسابداری روی سرور یا کامپیوتر کاربری.',
       'پیکربندی شبکه کاربری و دسترسی‌ها.',
       'آموزش کاربران برای کار با نرم‌افزار.',
-      'پشتیبانی و رفع مشکلات نرم‌افزاری در مستقبل.',
+      'پشتیبانی و رفع مشکلات نرم‌افزاری در آینده.',
     ],
     faq: [
       { q: 'کدام نرم‌افزار حسابداری پشتیبانی می‌کنید؟', a: 'هلو، سپیدار، پارسا و سایر نرم‌افزارهای حسابداری رایج در ایران.' },
@@ -67,8 +45,8 @@ const SERVICE_DETAILS: Record<number, { summary: string; details: string[]; faq:
       'بهینه‌سازی منابع سرور برای افزایش سرعت.',
     ],
     faq: [
-      { q: 'کدام سرور مناسب است؟', a: 'Windows Server برای محیط‌های مایکروسیافت و Linux برای وب و پایگاه داده.' },
-      { q: 'آیا پایش ۲۴ ساعته است؟', a: 'بله، پایش موقت و دائمی بر اساس قرارداد قابل انجام است.' },
+      { q: 'کدام سرور مناسب است؟', a: 'Windows Server برای محیط‌های مایکروسافت و Linux برای وب و پایگاه داده.' },
+      { q: 'آیا پایش ۲۴ ساعته است؟', a: 'بله، پایش دوره‌ای و دائمی بر اساس قرارداد قابل انجام است.' },
     ],
   },
   4: {
@@ -81,36 +59,36 @@ const SERVICE_DETAILS: Record<number, { summary: string; details: string[]; faq:
       'پایش ترافیک شبکه برای تشخیص تهدیدات.',
     ],
     faq: [
-      { q: 'آیا فایروال سخت‌افزاری نصب می‌کنید؟', a: 'بله، نصب و پیکربندی فایروال‌های Cisco، MikroTik و دیگران.' },
+      { q: 'آیا فایروال سخت‌افزاری نصب می‌کنید؟', a: 'بله، نصب و پیکربندی فایروال‌های Cisco، MikroTik و سایر برندها.' },
       { q: 'آیا امنیت برای سرور هم ارائه می‌شود؟', a: 'بله، امنیت شبکه و سرور به صورت یکپارچه طراحی می‌شود.' },
     ],
   },
   5: {
     summary:
-      'پیاده‌سازی بکاپ‌گیری خودکار و بازیابی اطلاعات تا هیچ خرابی یا خطایی به نابودی داده‌های شما منجر نشود.',
+      'طراحی و راه‌اندازی شبکه‌های کامپیوتری سازمانی با تجهیزات معتبر و قابلیت توسعه، از کابل‌کشی تا سوییچ و روتر.',
     details: [
-      'راه‌اندازی بکاپ‌گیری خودکار روزانه و هفته‌ای.',
-      'ذخیره بکاپ در NAS یا ابری.',
-      'تست منظم بازیابی اطلاعات.',
-      'بازار بازی سریع در صورت خطای سیستم.',
+      'طراحی توپولوژی شبکه بر اساس تعداد کاربران و نیازهای سازمانی.',
+      'راه‌اندازی سوییچ، روتر و تجهیزات شبکه با برندهای Cisco و MikroTik.',
+      'پیکربندی VLAN، DHCP، DNS و کنترل دسترسی.',
+      'پشتیبانی مستمر شبکه و رفع سریع اختلال‌ها در کوتاه‌ترین زمان.',
     ],
     faq: [
-      { q: 'بکاپ کجا ذخیره می‌شود؟', a: 'در NAS محلی و/یا 저장 ابری بر اساس نیازمندی.' },
-      { q: 'آیا بازیابی تست می‌شود؟', a: 'بله، تست دوره‌ای بازیابی برای اطمینان از صحت بکاپ انجام می‌گیرد.' },
+      { q: 'چه تجهیزاتی برای شبکه سازمانی نیاز است؟', a: 'روتر، سوییچ، کابل‌های شبکه، Patch Panel و تجهیزات Wi-Fi در صورت نیاز.' },
+      { q: 'زمان راه‌اندازی شبکه چقدر است؟', a: 'بسته به اندازه شبکه، بین ۲ تا ۷ روز کاری طول می‌کشد.' },
     ],
   },
   6: {
     summary:
       'بررسی و رفع سریع مشکلات سیستم و شبکه با پشتیبانی فنی پاسخگو، در دسترس و متخصص.',
     details: [
-      'تشخیص سریع потеря اتصال شبکه.',
+      'تشخیص سریع قطعی اتصال شبکه.',
       'راه‌اندازی مجدد سرویس‌های متوقف شده.',
       'راهنمایی ریموت و حضوری برای رفع مشکل.',
       'پشتیبانی ۲۴/۷ بر اساس درخواست.',
     ],
     faq: [
       { q: 'زمان پاسخگویی چقدر است؟', a: 'پاسخگویی زودتر از ۴ ساعت در ساعات اداری.' },
-      { q: 'آیا پشتیبانی ریموت دارید؟', a: 'بله، با ابزارهای ریموت دوست دوستانه.' },
+      { q: 'آیا پشتیبانی ریموت دارید؟', a: 'بله، با ابزارهای ریموت امن.' },
     ],
   },
   7: {
@@ -127,7 +105,7 @@ const SERVICE_DETAILS: Record<number, { summary: string; details: string[]; faq:
       { q: 'آیا پرینتر شبکه مشمول است؟', a: 'بله، اشتراک‌گذاری پرینتر شبکه شامل است.' },
     ],
   },
-8: {
+  8: {
     summary:
       'قرارداد پشتیبانی و نگهداری دوره‌ای؛ بازرسی منظم، به‌روزرسانی‌ها و پیشگیری از توقف کار مجموعه.',
     details: [
@@ -137,7 +115,7 @@ const SERVICE_DETAILS: Record<number, { summary: string; details: string[]; faq:
       'پیشگیری از توقف کار با نگهداری پیشگیرانه.',
     ],
     faq: [
-      { q: 'قرارداد چقدر طول می‌کشد؟', a: 'ماهانه یا فصلی، بر اساس neva نیاز.' },
+      { q: 'قرارداد چقدر طول می‌کشد؟', a: 'ماهانه یا فصلی، بر اساس نیاز شما.' },
       { q: 'چه عواقبی در صورت توقف دارد؟', a: 'از توقف کار جلوگیری می‌شود و سریع پاسخگویی امکان‌پذیر است.' },
     ],
   },
@@ -150,7 +128,7 @@ const SERVICE_DETAILS: Record<number, { summary: string; details: string[]; faq:
       'سئو تکنیکی و محتوایی برای رتبه‌بندی بهتر در گوگل.',
       'پنل مدیریت محتوا (CMS) آسان برای به‌روزرسانی توسط مشتری.',
       'بهینه‌سازی سرعت لود و Core Web Vitals.',
-      'امنیت بالا با HTTPS، CSP وHeaders امنیتی.',
+      'امنیت بالا با HTTPS، CSP و هدرهای امنیتی.',
     ],
     faq: [
       { q: 'زمان طراحی سایت چقدر است؟', a: 'بسته به پیچیدگی، بین ۲ تا ۶ هفته.' },
@@ -230,13 +208,13 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           __html: JSON.stringify(
             breadcrumbJsonLd([
               { name: 'صفحه اصلی', url: '/' },
-              { name: 'خدمات', url: '/services' },
+              { name: 'خدمات', url: '/#services' },
               { name: service.title, url: `/services/${params.slug}` },
             ])
           ),
         }}
       />
-      <nav className="mb-12" aria-label="نمای nurture">
+      <nav className="mb-12" aria-label="مسیر صفحه">
         <ol className="flex items-center gap-2 text-[0.85rem] text-steel-muted font-mono">
           <li>
             <a href="/" className="hover:text-accent transition-colors">
@@ -245,7 +223,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           </li>
           <li>/</li>
           <li>
-            <a href="#services" className="hover:text-accent transition-colors">
+            <a href="/#services" className="hover:text-accent transition-colors">
               خدمات
             </a>
           </li>
@@ -271,12 +249,12 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               </li>
             ))}
           </ul>
-          <div className="mt-8 p-6 bg-panel border border-line rounded-[2px]">
-            <h3 className="text-accent font-bold mb-4 font-mono">ویژگی‌های کلیدی</h3>
+          <div className="mt-8 p-6 bg-panel border border-line rounded-2xl">
+            <h3 className="text-accent-bright font-bold mb-4 font-mono">ویژگی‌های کلیدی</h3>
             <ul className="space-y-3 text-steel-muted text-[0.95rem]">
               {service.tags.map((tag, i) => (
                 <li key={i} className="flex items-start gap-2">
-                  <span className="text-accent font-mono text-sm mt-0.5">✓</span>
+                  <span className="text-accent-bright font-mono text-sm mt-0.5">✓</span>
                   {tag}
                 </li>
               ))}
@@ -284,16 +262,16 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           </div>
         </div>
         <div className="w-full md:w-[340px]">
-          <div className="bg-panel border border-line p-8 rounded-[2px] sticky top-24">
+          <div className="bg-panel border border-line p-8 rounded-2xl sticky top-24">
             <h3 className="text-steel font-bold mb-6 text-[1.1rem]">تماس سریع</h3>
             <p className="text-steel-muted text-[0.95rem] mb-6">
               برای دریافت استعلام قیمت و راهنمایی درباره{' '}
-              <span className="text-accent font-bold">{service.title}</span>، با ما تماس بگیرید.
+              <span className="text-accent-bright font-bold">{service.title}</span>، با ما تماس بگیرید.
             </p>
             <div className="space-y-4">
               <a
                 href="https://t.me/mohoyek"
-                className="block bg-accent-soft border border-accent-line text-accent px-5 py-3 text-[0.95rem] font-medium rounded-[2px] text-center hover:bg-accent transition-colors"
+                className="block bg-accent-soft border border-accent-line text-accent-bright px-5 py-3 text-[0.95rem] font-medium rounded-xl text-center hover:bg-accent transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -301,13 +279,13 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               </a>
               <a
                 href="mailto:info@tunelia.com"
-                className="block bg-accent-soft border border-accent-line text-accent px-5 py-3 text-[0.95rem] font-medium rounded-[2px] text-center hover:bg-accent transition-colors"
+                className="block bg-accent-soft border border-accent-line text-accent-bright px-5 py-3 text-[0.95rem] font-medium rounded-xl text-center hover:bg-accent transition-colors"
               >
                 info@tunelia.com
               </a>
               <a
                 href="tel:+989013365949"
-                className="block bg-accent-soft border border-accent-line text-accent px-5 py-3 text-[0.95rem] font-medium rounded-[2px] text-center hover:bg-accent transition-colors"
+                className="block bg-accent-soft border border-accent-line text-accent-bright px-5 py-3 text-[0.95rem] font-medium rounded-xl text-center hover:bg-accent transition-colors"
                 dir="ltr"
               >
                 0901 336 5949
@@ -317,22 +295,22 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-px bg-line border border-line mb-16">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-3 mb-16">
         {services.map((s) => (
-          <a
+          <Link
             key={s.id}
             href={`/services/${ID_TO_SLUG[s.id] || s.id}`}
-            className="bg-panel p-6 transition-colors hover:bg-panel-2 border-b border-line last:border-0"
+            className="group bg-panel p-6 rounded-2xl border border-line transition-all duration-300 hover:-translate-y-1 hover:border-accent-line"
           >
             <div className="flex items-center gap-3 mb-3">
-              <span className="w-[24px] h-[24px] text-accent flex-shrink-0">
+              <span className="w-[24px] h-[24px] text-accent-bright flex-shrink-0">
                 <IconSvg name={s.iconKey} />
               </span>
-              <span className="font-mono text-accent text-[0.75rem]">{s.num}</span>
+              <span className="font-mono text-accent-bright text-[0.75rem]">{s.num}</span>
             </div>
             <h3 className="text-steel font-semibold text-[1.05rem] mb-2">{s.title}</h3>
             <p className="text-steel-muted text-[0.9rem]">{s.description}</p>
-          </a>
+          </Link>
         ))}
       </div>
 
@@ -340,8 +318,8 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         <h2 className="text-[1.7rem] font-bold text-steel mb-8">سوالات متداول</h2>
         <div className="space-y-4">
           {detail.faq.map((item, i) => (
-            <div key={i} className="bg-panel border border-line p-6 rounded-[2px]">
-              <h3 className="text-accent font-semibold mb-2 text-[1rem]">{item.q}</h3>
+            <div key={i} className="bg-panel border border-line p-6 rounded-2xl">
+              <h3 className="text-accent-bright font-semibold mb-2 text-[1rem]">{item.q}</h3>
               <p className="text-steel-muted text-[0.95rem] leading-relaxed">{item.a}</p>
             </div>
           ))}

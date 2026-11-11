@@ -1,16 +1,9 @@
 import type { Metadata } from 'next';
 import { cities } from '@/data/cities';
 import { services } from '@/data/services';
-import { professionalServiceJsonLd, webSiteJsonLd, organizationJsonLd } from '@/lib/metadata';
-import Image from 'next/image';
+import { serviceSlug } from '@/lib/serviceSlugs';
+import Link from 'next/link';
 import IconSvg from '@/components/ui/IconSvg';
-
-const CITY_TO_ID: Record<string, number> = {
-  dezful: 1,
-  shush: 2,
-  andimeshk: 3,
-  khuzestan: 4,
-};
 
 export async function generateStaticParams() {
   return cities.map((city) => ({ city: city.slug }));
@@ -81,40 +74,28 @@ export default function CityPage({ params }: { params: { city: string } }) {
         {city.name} و مناطق حومه ارائه می‌دهیم.
       </p>
 
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-px bg-line border border-line mb-16">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-16">
         {services.map((service) => {
-          const slugMap: Record<number, string> = {
-            1: 'backup',
-            2: 'accounting',
-            3: 'server',
-            4: 'security',
-            5: 'network',
-            6: 'support',
-            7: 'sharing',
-            8: 'maintenance',
-            9: 'web',
-          };
-          const slug = slugMap[service.id] || service.id.toString();
           return (
-            <a
+            <Link
               key={service.id}
-              href={`/services/${slug}`}
-              className="bg-panel p-6 transition-colors hover:bg-panel-2 border-b border-line last:border-0"
+              href={`/services/${serviceSlug(service.id)}`}
+              className="group bg-panel p-6 rounded-2xl border border-line transition-all duration-300 hover:-translate-y-1 hover:border-accent-line"
             >
               <div className="flex items-center gap-3 mb-3">
-                <span className="w-[24px] h-[24px] text-accent flex-shrink-0">
+                <span className="w-[24px] h-[24px] text-accent-bright flex-shrink-0">
                   <IconSvg name={service.iconKey} />
                 </span>
-                <span className="font-mono text-accent text-[0.75rem]">{service.num}</span>
+                <span className="font-mono text-accent-bright text-[0.75rem]">{service.num}</span>
               </div>
               <h3 className="text-steel font-semibold text-[1.05rem] mb-2">{service.title}</h3>
               <p className="text-steel-muted text-[0.9rem]">{service.description}</p>
-            </a>
+            </Link>
           );
         })}
       </div>
 
-      <div className="bg-panel border border-line p-12 rounded-[2px] mb-16 text-center">
+      <div className="bg-panel border border-line p-12 rounded-2xl mb-16 text-center">
         <h2 className="text-[1.7rem] font-bold text-steel mb-6">تماس سریع برای {city.name}</h2>
         <p className="text-steel-muted text-[1.05rem] mb-8">
           برای دریافت استعلام قیمت و راهنمایی درباره خدمات شبکه و سرور در{' '}
@@ -123,7 +104,7 @@ export default function CityPage({ params }: { params: { city: string } }) {
         <div className="flex flex-wrap justify-center gap-4">
           <a
             href="https://t.me/mohoyek"
-            className="block bg-accent-soft border border-accent-line text-accent px-5 py-3 text-[0.95rem] font-medium rounded-[2px] text-center hover:bg-accent transition-colors"
+            className="block bg-accent-soft border border-accent-line text-accent-bright px-5 py-3 text-[0.95rem] font-medium rounded-xl text-center hover:bg-accent transition-colors"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -131,13 +112,13 @@ export default function CityPage({ params }: { params: { city: string } }) {
           </a>
           <a
             href="mailto:info@tunelia.com"
-            className="block bg-accent-soft border border-accent-line text-accent px-5 py-3 text-[0.95rem] font-medium rounded-[2px] text-center hover:bg-accent transition-colors"
+            className="block bg-accent-soft border border-accent-line text-accent-bright px-5 py-3 text-[0.95rem] font-medium rounded-xl text-center hover:bg-accent transition-colors"
           >
             info@tunelia.com
           </a>
           <a
             href="tel:+989013365949"
-            className="block bg-accent-soft border border-accent-line text-accent px-5 py-3 text-[0.95rem] font-medium rounded-[2px] text-center hover:bg-accent transition-colors"
+            className="block bg-accent-soft border border-accent-line text-accent-bright px-5 py-3 text-[0.95rem] font-medium rounded-xl text-center hover:bg-accent transition-colors"
             dir="ltr"
           >
             0901 336 5949
@@ -145,7 +126,7 @@ export default function CityPage({ params }: { params: { city: string } }) {
         </div>
       </div>
 
-      <div className="bg-panel border border-line p-10 rounded-[2px]">
+      <div className="bg-panel border border-line p-10 rounded-2xl">
         <h2 className="text-[1.4rem] font-bold text-steel mb-4">آیا در {city.name} خدمت می‌دهید؟</h2>
         <ul className="space-y-3 text-steel-muted text-[0.95rem] leading-relaxed">
           <li className="flex items-start gap-2">
