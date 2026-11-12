@@ -16,8 +16,9 @@ export default function ContactButton({
   icon,
 }: ContactButtonProps) {
   const baseClasses =
-    'inline-flex items-center gap-2.5 bg-ink border border-line text-steel px-6 py-3 text-[0.95rem] font-medium transition-all duration-200 hover:border-accent-line hover:bg-accent-soft hover:-translate-y-0.5';
-  const variantClasses = variant === 'primary' ? 'border-accent-line bg-accent-soft text-accent' : '';
+    'inline-flex items-center gap-2.5 rounded-[14px] bg-ink border border-line text-steel px-6 py-3 text-[0.95rem] font-medium transition-all duration-200 hover:border-accent-line hover:bg-accent-soft hover:-translate-y-0.5';
+  const variantClasses =
+    variant === 'primary' ? 'border-accent-line bg-accent-soft text-accent-bright' : '';
 
   return (
     <a

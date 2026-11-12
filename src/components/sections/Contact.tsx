@@ -1,4 +1,5 @@
 import ContactButton from '../ui/ContactButton';
+import Reveal from '../ui/Reveal';
 import Image from 'next/image';
 
 const TelegramIcon = (
@@ -33,50 +34,55 @@ const WhatsAppIcon = (
 
 export default function Contact() {
   return (
-    <section
-      id="contact"
-      className="marked mt-20 border border-line py-12 px-8 text-center bg-panel max-[640px]:p-7"
-      aria-labelledby="contact-title"
-    >
-      <Image
-        src="/tunelia-logo.png"
-        alt="تونلیا"
-        width={64}
-        height={64}
-        className="contact-logo w-16 h-16 mx-auto mb-6 rounded-sm"
-        priority
-      />
-      <h2 id="contact-title" className="text-[1.7rem] text-steel font-bold">با ما در تماس باشید</h2>
-      <p className="lead mt-4 text-steel-muted text-[1.02rem]">
-        برای مشاوره و استعلام قیمت همین الان پیام بده.
-      </p>
-      <div className="flex flex-wrap justify-center gap-4 mt-9">
-        <ContactButton
-          href="https://t.me/mohoyek"
-          variant="primary"
-          external
-          icon={TelegramIcon}
-        >
-          تلگرام: mohoyek@
-        </ContactButton>
-        <ContactButton href="mailto:info@tunelia.ir" icon={MailIcon}>
-          info@tunelia.ir
-        </ContactButton>
-        <ContactButton href="tel:+989013365949" icon={PhoneIcon}>
-          <span dir="ltr">0901&nbsp;336&nbsp;5949</span>
-        </ContactButton>
-        <ContactButton
-          href="https://wa.me/989013365949"
-          variant="primary"
-          external
-          icon={WhatsAppIcon}
-        >
-          واتس‌آپ: 09013365949
-        </ContactButton>
-      </div>
-      <p className="mt-9 text-[1.15rem] font-bold text-accent">
-        یک مجموعه حرفه‌ای، یک پشتیبان حرفه‌ای می‌خواهد!
-      </p>
+    <section id="contact" className="mt-24" aria-labelledby="contact-title">
+      <Reveal>
+        <div className="glow-center relative overflow-hidden rounded-[22px] border border-line bg-panel py-14 px-8 text-center max-[640px]:p-7 max-[640px]:py-10">
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 top-0 h-[220px]"
+            style={{
+              background:
+                'radial-gradient(ellipse 50% 100% at 50% 0%, rgba(209,128,44,0.14), transparent 70%)',
+            }}
+          />
+          <div className="relative">
+            <Image
+              src="/tunelia-logo.png"
+              alt="تونلیا"
+              width={64}
+              height={64}
+              className="w-16 h-16 mx-auto mb-6 rounded-2xl border border-line"
+              priority
+            />
+            <h2
+              id="contact-title"
+              className="text-[clamp(1.7rem,3.4vw,2.4rem)] text-steel font-extrabold"
+            >
+              با ما در تماس باشید
+            </h2>
+            <p className="mt-4 text-steel-muted text-[1.02rem]">
+              برای مشاوره و استعلام قیمت همین الان پیام بده.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4 mt-9">
+              <ContactButton href="https://t.me/mohoyek" variant="primary" external icon={TelegramIcon}>
+                تلگرام: mohoyek@
+              </ContactButton>
+              <ContactButton href="mailto:info@tunelia.com" icon={MailIcon}>
+                info@tunelia.com
+              </ContactButton>
+              <ContactButton href="tel:+989013365949" icon={PhoneIcon}>
+                <span dir="ltr">0901&nbsp;336&nbsp;5949</span>
+              </ContactButton>
+              <ContactButton href="https://wa.me/989013365949" variant="primary" external icon={WhatsAppIcon}>
+                واتس‌آپ: 09013365949
+              </ContactButton>
+            </div>
+            <p className="mt-10 text-[1.15rem] font-bold text-accent-bright">
+              یک مجموعه حرفه‌ای، یک پشتیبان حرفه‌ای می‌خواهد!
+            </p>
+          </div>
+        </div>
+      </Reveal>
     </section>
   );
 }

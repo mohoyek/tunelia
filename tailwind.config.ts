@@ -8,17 +8,18 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: '#0a0c0e',
-        panel: '#12161a',
-        'panel-2': '#181d22',
-        line: '#262d34',
-        'line-soft': '#1c2228',
-        steel: '#e8eaec',
-        'steel-muted': '#8b949c',
-        'steel-dim': '#565f68',
+        ink: '#0b0e12',
+        panel: '#12171d',
+        'panel-2': '#171d24',
+        line: '#232b34',
+        'line-soft': '#181e25',
+        steel: '#e9ebee',
+        'steel-muted': '#97a0a8',
+        'steel-dim': '#5d666f',
         accent: '#d1802c',
-        'accent-soft': '#3a2a18',
-        'accent-line': '#5c3f1f',
+        'accent-bright': '#f0993f',
+        'accent-soft': 'rgba(209, 128, 44, 0.10)',
+        'accent-line': 'rgba(209, 128, 44, 0.32)',
       },
       fontFamily: {
         vazirmatn: ['var(--font-vazirmatn)', 'Tahoma', 'sans-serif'],

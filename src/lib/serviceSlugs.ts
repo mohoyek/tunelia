@@ -1,18 +1,11 @@
-import { services } from '@/data/services';
+/**
+ * منبع واحد نگاشت id ↔ slug خدمات.
+ * هر جای پروژه که به slug یا id نیاز است، فقط از این فایل استفاده شود
+ * تا مثل باگ قبلی (جابجایی network/backup) تکرار نشود.
+ * این دو مپ باید آینهٔ هم باشند — هر تغییر در یکی باید در دیگری هم اعمال شود.
+ */
 
-export const SLUG_TO_ID: Record<string, number> = {
-  backup: 1,
-  accounting: 2,
-  server: 3,
-  security: 4,
-  network: 5,
-  support: 6,
-  sharing: 7,
-  maintenance: 8,
-  web: 9,
-};
-
-export const ID_TO_SLUG: Record<number, string> = {
+const ID_TO_SLUG_MAP: Record<number, string> = {
   1: 'backup',
   2: 'accounting',
   3: 'server',
@@ -24,19 +17,24 @@ export const ID_TO_SLUG: Record<number, string> = {
   9: 'web',
 };
 
-export function getSlugById(id: number): string {
-  return ID_TO_SLUG[id] || String(id);
+const SLUG_TO_ID_MAP: Record<string, number> = {
+  backup: 1,
+  accounting: 2,
+  server: 3,
+  security: 4,
+  network: 5,
+  support: 6,
+  sharing: 7,
+  maintenance: 8,
+  web: 9,
+};
+
+export const ID_TO_SLUG = ID_TO_SLUG_MAP;
+export const SLUG_TO_ID = SLUG_TO_ID_MAP;
+
+export function serviceSlug(id: number): string {
+  return ID_TO_SLUG_MAP[id] ?? String(id);
 }
 
-export function getIdBySlug(slug: string): number | undefined {
-  return SLUG_TO_ID[slug];
-}
-
-export function getAllSlugs(): string[] {
-  return Object.keys(SLUG_TO_ID);
-}
-
-export function getServiceBySlug(slug: string) {
-  const id = SLUG_TO_ID[slug];
-  return services.find((s) => s.id === id);
-}
+/** همه slugهای معتبر — برای generateStaticParams و اعتبارسنجی */
+export const SERVICE_SLUGS = Object.values(ID_TO_SLUG_MAP);
