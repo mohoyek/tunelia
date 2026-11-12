@@ -4,6 +4,8 @@ import { services } from '@/data/services';
 import { serviceSlug } from '@/lib/serviceSlugs';
 import Link from 'next/link';
 import IconSvg from '@/components/ui/IconSvg';
+import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
 
 export async function generateStaticParams() {
   return cities.map((city) => ({ city: city.slug }));
@@ -64,7 +66,9 @@ export default function CityPage({ params }: { params: { city: string } }) {
   }
 
   return (
-    <section className="max-w-container mx-auto py-20 px-[5%] max-[640px]:py-14 max-[640px]:px-[6%]">
+    <>
+      <Navbar />
+      <main className="max-w-container mx-auto py-20 px-[5%] max-[640px]:py-14 max-[640px]:px-[6%]">
       <h1 className="text-[2.2rem] font-extrabold text-steel mb-6 leading-tight">
         خدمات شبکه و سرور در {city.name}
       </h1>
@@ -151,6 +155,8 @@ export default function CityPage({ params }: { params: { city: string } }) {
           </li>
         </ul>
       </div>
-    </section>
+      </main>
+      <Footer />
+    </>
   );
 }

@@ -3,10 +3,15 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
+/**
+ * لینک‌ها با مسیر مطلق تا از هر صفحه‌ای (مثل /projects یا صفحهٔ شهرها)
+ * روی همان صفحهٔ اصلی کار کنند.
+ */
 const NAV_LINKS = [
-  { href: '#services', label: 'خدمات' },
-  { href: '#safety', label: 'پشتیبانی' },
-  { href: '#contact', label: 'تماس' },
+  { href: '/#services', label: 'خدمات' },
+  { href: '/projects', label: 'نمونه‌کارها' },
+  { href: '/#safety', label: 'پشتیبانی' },
+  { href: '/#contact', label: 'تماس' },
 ];
 
 export default function Navbar() {
@@ -25,7 +30,7 @@ export default function Navbar() {
     <nav aria-label="ناوبری اصلی" className="sticky top-0 z-50 px-[4%] pt-4 bg-transparent">
       <div className="max-w-container mx-auto relative">
         <div className="flex items-center justify-between rounded-2xl border border-line bg-ink/85 backdrop-blur-md px-5 py-3">
-          <a href="#top" className="flex items-center gap-2.5 font-bold text-steel text-[1.05rem]">
+          <a href="/" className="flex items-center gap-2.5 font-bold text-steel text-[1.05rem]">
             <Image
               src="/tunelia-logo.png"
               alt="تونلیا"
@@ -49,7 +54,7 @@ export default function Navbar() {
               </li>
             ))}
             <li>
-              <a href="#contact" className="btn btn-primary !py-2.5 !px-5 text-[0.88rem]">
+              <a href="/#contact" className="btn btn-primary !py-2.5 !px-5 text-[0.88rem]">
                 مشاورهٔ رایگان
               </a>
             </li>
@@ -101,7 +106,7 @@ export default function Navbar() {
               ))}
               <li className="pt-2 border-t border-line mt-2">
                 <a
-                  href="#contact"
+                  href="/#contact"
                   onClick={() => setOpen(false)}
                   className="btn btn-primary w-full !py-2.5 text-[0.9rem]"
                 >

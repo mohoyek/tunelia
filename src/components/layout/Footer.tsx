@@ -19,13 +19,16 @@ export default function Footer() {
             </div>
           </div>
           <nav aria-label="نقشهٔ سایت" className="flex items-center gap-7">
-            <a href="#services" className="text-steel-muted text-[0.9rem] transition-colors hover:text-accent-bright">
+            <a href="/#services" className="text-steel-muted text-[0.9rem] transition-colors hover:text-accent-bright">
               خدمات
             </a>
-            <a href="#safety" className="text-steel-muted text-[0.9rem] transition-colors hover:text-accent-bright">
+            <a href="/projects" className="text-steel-muted text-[0.9rem] transition-colors hover:text-accent-bright">
+              نمونه‌کارها
+            </a>
+            <a href="/#safety" className="text-steel-muted text-[0.9rem] transition-colors hover:text-accent-bright">
               پشتیبانی
             </a>
-            <a href="#contact" className="text-steel-muted text-[0.9rem] transition-colors hover:text-accent-bright">
+            <a href="/#contact" className="text-steel-muted text-[0.9rem] transition-colors hover:text-accent-bright">
               تماس
             </a>
           </nav>
