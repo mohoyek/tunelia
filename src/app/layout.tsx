@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [{ url: '/tunelia-logo.png', type: 'image/png' }],
-    apple: '/tunelia-logo.png',
+    apple: '/brand-180.png',
   },
   openGraph: {
     type: 'website',
@@ -32,8 +32,8 @@ export const metadata: Metadata = {
       'پشتیبانی حرفه‌ای شبکه و سرور، امنیت اطلاعات، بکاپ‌گیری، نصب نرم‌افزارهای حسابداری و نگهداری دوره‌ای مجموعه‌ها',
     images: [
       {
-        url: '/og-card.svg',
-        type: 'image/svg+xml',
+        url: '/og-card.png',
+        type: 'image/png',
         width: 1200,
         height: 630,
         alt: 'تونلیا',
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     title: 'خدمات شبکه، سرور و فناوری اطلاعات | تونلیا',
     description:
       'پشتیبانی حرفه‌ای شبکه و سرور، امنیت اطلاعات، بکاپ‌گیری، نصب نرم‌افزارهای حسابداری و نگهداری دوره‌ای مجموعه‌ها',
-    images: ['/og-card.svg'],
+    images: ['/og-card.png'],
   },
 };
 

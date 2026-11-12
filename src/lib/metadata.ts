@@ -8,7 +8,7 @@ export const professionalServiceJsonLd = {
   url: 'https://tunelia.ir/',
   logo: 'https://tunelia.ir/tunelia-logo.png',
   telephone: '+989013365949',
-  email: 'info@tunelia.com',
+  email: 'info@tunelia.ir',
   priceRange: '$$',
   inLanguage: 'fa',
   areaServed: 'IR',
@@ -78,11 +78,6 @@ export const webSiteJsonLd = {
   alternateName: 'TUNELIA',
   url: 'https://tunelia.ir/',
   inLanguage: 'fa',
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: 'https://tunelia.ir/search?q={search_term}',
-    'query-input': 'required name=search_term',
-  },
 };
 
 export const organizationJsonLd = {
@@ -93,13 +88,13 @@ export const organizationJsonLd = {
   url: 'https://tunelia.ir/',
   logo: 'https://tunelia.ir/tunelia-logo.png',
   telephone: '+989013365949',
-  email: 'info@tunelia.com',
+  email: 'info@tunelia.ir',
   priceRange: '$$',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'تهران، ایران',
-    addressLocality: 'تهران',
-    addressRegion: 'تهران',
+    streetAddress: 'دزفول، خوزستان، ایران',
+    addressLocality: 'دزفول',
+    addressRegion: 'خوزستان',
     postalCode: '',
     addressCountry: 'IR',
   },
